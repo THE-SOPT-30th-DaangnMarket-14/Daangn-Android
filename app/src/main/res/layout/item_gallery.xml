@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -18,6 +18,9 @@
             android:id="@+id/iv_gallery"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@{image.isSelected ? @drawable/rectangle_orange_border_2 : null}"
+            android:cropToPadding="true"
+            android:padding='@{image.isSelected ? @dimen/selected_image : @dimen/padding_null}'
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
@@ -28,9 +31,11 @@
 
         <TextView
             android:id="@+id/tv_select"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:background="@{image.isSelected ? @drawable/circle_orange : @drawable/circle_white_stroke}"
+            android:gravity="center"
+            android:text="@{image.isSelected ? Integer.toString(image.selectOrder) : null}"
             android:textColor="@color/white_ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

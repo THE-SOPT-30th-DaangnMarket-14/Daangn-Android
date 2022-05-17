@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.util.Size
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,7 +33,7 @@ class GalleryActivity : AppCompatActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
-                initCustomGallery()
+                fetchGallery()
             } else {
                 Toast.makeText(
                     this,
@@ -45,14 +46,17 @@ class GalleryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gallery)
+        binding.viewModel = writeViewModel
+        binding.lifecycleOwner = this
         initRecyclerView()
         checkPermission()
+        observeLiveData()
     }
 
     private fun checkPermission() {
         when {
             checkSelfPermissionGranted() -> {
-                initCustomGallery()
+                fetchGallery()
             }
             shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
                 showInContextUI()
@@ -85,18 +89,25 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        galleryAdapter = GalleryAdapter()
+        galleryAdapter = GalleryAdapter { layoutPosition ->
+            writeViewModel.selectImage(layoutPosition)
+        }
         with(binding.rvGallery) {
             addItemDecoration(GalleryDecoration(3))
             adapter = galleryAdapter
         }
     }
 
-    private fun initCustomGallery() {
-//        galleryAdapter.replaceItem(imageBitmapList)
+    private fun fetchGallery() {
         writeViewModel.fetchGallery()
+    }
+
+    private fun observeLiveData() {
         writeViewModel.imageList.observe(this) {
             galleryAdapter.replaceItem(it)
+        }
+        writeViewModel.pickOutOfBound.observe(this) {
+            Toast.makeText(this, "10장까지만 선택해주세요", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -4,12 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.map
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
 import org.sopt.daangnmarket_android.domain.repository.GalleryRepository
+import org.sopt.daangnmarket_android.util.SingleLiveEvent
+import java.lang.IllegalStateException
+import java.lang.IndexOutOfBoundsException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,6 +23,12 @@ class WriteViewModel @Inject constructor(
     private var _selectedImageList = MutableLiveData<List<Pair<GalleryImage, Int>>>()
     val selectedImageList: LiveData<List<Pair<GalleryImage, Int>>> get() = _selectedImageList
 
+    private var _pickOutOfBound = SingleLiveEvent<Unit>()
+    val pickOutOfBound: LiveData<Unit> get() = _pickOutOfBound
+
+    private var _isConfirmPossible = MutableLiveData<Boolean>()
+    val isConfirmPossible: LiveData<Boolean> get() = _isConfirmPossible
+
     fun fetchGallery() {
         kotlin.runCatching {
             galleryRepository.fetchGallery()
@@ -30,5 +37,31 @@ class WriteViewModel @Inject constructor(
         }.onFailure {
             Log.e("fetchGallery() in ViewModel", "failed")
         }
+    }
+
+    fun selectImage(layoutPosition: Int) {
+        val imgList = imageList.value?.toMutableList() ?: mutableListOf()
+        val selectedImgList =
+            selectedImageList.value?.toMutableList() ?: mutableListOf()
+        val img = imgList[layoutPosition] ?: throw IndexOutOfBoundsException()
+        img.isSelected = !img.isSelected
+        when (img.isSelected) {
+            true -> {
+                if (selectedImgList.size < 10) {
+                    selectedImgList.add(Pair(img, layoutPosition))
+                } else {
+                    img.isSelected = !img.isSelected
+                    _pickOutOfBound.call()
+                }
+            }
+            false -> selectedImgList.remove(selectedImgList.find { it.first == img })
+        }
+        selectedImgList.forEachIndexed { index, pair ->
+            pair.first.selectOrder = index + 1
+            imgList[pair.second] = pair.first
+        }
+        _imageList.value = imgList
+        _selectedImageList.value = selectedImgList
+        _isConfirmPossible.value = selectedImgList.isNotEmpty()
     }
 }

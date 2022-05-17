@@ -1,5 +1,6 @@
 package org.sopt.daangnmarket_android.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,7 +12,7 @@ import org.sopt.daangnmarket_android.domain.model.GalleryImage
 import org.sopt.daangnmarket_android.databinding.ItemCameraBinding
 import org.sopt.daangnmarket_android.databinding.ItemGalleryBinding
 
-class GalleryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GalleryAdapter(private val imageClick: (Int) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
     class CameraViewHolder(private val binding: ItemCameraBinding) :
@@ -21,13 +22,14 @@ class GalleryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    class GalleryViewHolder(private val binding: ItemGalleryBinding) :
+    class GalleryViewHolder(private val binding: ItemGalleryBinding, private val itemClick: (Int) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GalleryImage) {
             binding.ivGallery.setImageBitmap(item.image)
+            binding.image = item
 
             binding.root.setOnClickListener {
-
+                itemClick(this.layoutPosition)
             }
         }
     }
@@ -56,7 +58,7 @@ class GalleryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     parent,
                     false
                 )
-                GalleryViewHolder(binding)
+                GalleryViewHolder(binding, imageClick)
             }
             else -> throw IndexOutOfBoundsException()
         }
@@ -76,7 +78,9 @@ class GalleryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int = asyncDiffer.currentList.size
 
     fun replaceItem(itemList: List<GalleryImage?>) {
-        asyncDiffer.submitList(itemList)
+        asyncDiffer.submitList(itemList.map {
+            it?.copy()
+        })
     }
 
     companion object {
