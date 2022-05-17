@@ -11,7 +11,7 @@
         android:theme="@style/Theme.DaangnMarketAndroid" >
         <activity
             android:name=".ui.view.write.WriteActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.view.main.MainActivity"
             android:exported="true" >
