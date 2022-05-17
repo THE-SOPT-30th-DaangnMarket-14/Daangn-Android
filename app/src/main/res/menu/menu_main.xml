@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/selector_bottom_navi"
+        android:title="홈" />
+    <item
+        android:id="@+id/menu_viliage"
+        android:icon="@drawable/ic_viliage_24"
+        android:title="동네생활" />
+    <item
+        android:id="@+id/menu_gps"
+        android:icon="@drawable/ic_gps_24"
+        android:title="내 근처" />
+    <item
+        android:id="@+id/menu_talk"
+        android:icon="@drawable/ic_talk_24_unfill"
+        android:title="채팅" />
+    <item
+        android:id="@+id/menu_mypage"
+        android:icon="@drawable/ic_mypage_24"
+        android:title="나의 당근" />
+</menu>
