@@ -117,6 +117,7 @@
                 android:fontFamily="@font/nanum_barun_gothic"
                 android:textSize="14sp"
                 android:hint="@string/write_price"
+                android:inputType="number"
                 android:maxLength="10"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/v_line3" />
