@@ -7,7 +7,7 @@
 
         <variable
             name="image"
-            type="android.graphics.Bitmap" />
+            type="org.sopt.daangnmarket_android.domain.model.GalleryImage" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +30,7 @@
             android:id="@+id/tv_select"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/circle_white_stroke"
+            android:background="@{image.isSelected ? @drawable/circle_orange : @drawable/circle_white_stroke}"
             android:textColor="@color/white_ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

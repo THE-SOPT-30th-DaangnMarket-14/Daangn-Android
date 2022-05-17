@@ -1,6 +1,5 @@
 package org.sopt.daangnmarket_android.ui.adapter
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,46 +7,89 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.daangnmarket_android.R
+import org.sopt.daangnmarket_android.domain.model.GalleryImage
+import org.sopt.daangnmarket_android.databinding.ItemCameraBinding
 import org.sopt.daangnmarket_android.databinding.ItemGalleryBinding
 
-class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
+class GalleryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
-    class GalleryViewHolder(private val binding: ItemGalleryBinding) :
+    class CameraViewHolder(private val binding: ItemCameraBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Bitmap) {
-            binding.ivGallery.setImageBitmap(item)
+        fun bind() {
+
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
-        val binding = DataBindingUtil.inflate<ItemGalleryBinding>(
-            LayoutInflater.from(parent.context),
-            R.layout.item_gallery,
-            parent,
-            false
-        )
-        return GalleryViewHolder(binding)
+    class GalleryViewHolder(private val binding: ItemGalleryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: GalleryImage) {
+            binding.ivGallery.setImageBitmap(item.image)
+
+            binding.root.setOnClickListener {
+
+            }
+        }
     }
 
-    override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
-        holder.bind(asyncDiffer.currentList[position])
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            0 -> CAMERA_VIEW_HOLDER
+            else -> GALLERY_VIEW_HOLDER
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            CAMERA_VIEW_HOLDER -> {
+                val binding = ItemCameraBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                CameraViewHolder(binding)
+            }
+            GALLERY_VIEW_HOLDER -> {
+                val binding = DataBindingUtil.inflate<ItemGalleryBinding>(
+                    LayoutInflater.from(parent.context),
+                    R.layout.item_gallery,
+                    parent,
+                    false
+                )
+                GalleryViewHolder(binding)
+            }
+            else -> throw IndexOutOfBoundsException()
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (position) {
+            CAMERA_VIEW_HOLDER -> {
+                (holder as CameraViewHolder).bind()
+            }
+            else -> {
+                (holder as GalleryViewHolder).bind(asyncDiffer.currentList[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int = asyncDiffer.currentList.size
 
-    fun replaceItem(itemList: List<Bitmap>) {
+    fun replaceItem(itemList: List<GalleryImage?>) {
         asyncDiffer.submitList(itemList)
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<Bitmap>() {
-            override fun areItemsTheSame(oldItem: Bitmap, newItem: Bitmap): Boolean {
-                return oldItem == newItem
+        const val CAMERA_VIEW_HOLDER = 0
+        const val GALLERY_VIEW_HOLDER = 1
+
+        private val diffCallback = object : DiffUtil.ItemCallback<GalleryImage>() {
+            override fun areItemsTheSame(oldItem: GalleryImage, newItem: GalleryImage): Boolean {
+                return oldItem.image == newItem.image
             }
 
-            override fun areContentsTheSame(oldItem: Bitmap, newItem: Bitmap): Boolean {
-                return oldItem.sameAs(newItem)
+            override fun areContentsTheSame(oldItem: GalleryImage, newItem: GalleryImage): Boolean {
+                return oldItem == newItem
             }
         }
     }

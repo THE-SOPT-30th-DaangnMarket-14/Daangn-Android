@@ -65,11 +65,15 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.2'
 
     // Hilt
-    implementation "com.google.dagger:hilt-android:2.40"
-    kapt "com.google.dagger:hilt-android-compiler:2.40"
+    implementation 'com.google.dagger:hilt-android:2.40'
+    kapt 'com.google.dagger:hilt-android-compiler:2.40'
 
     // ktx
     implementation 'androidx.activity:activity-ktx:1.4.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation 'androidx.room:room-ktx:2.4.2'
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
+
+    // Paging 3
+    implementation 'androidx.paging:paging-runtime:3.1.1'
 }

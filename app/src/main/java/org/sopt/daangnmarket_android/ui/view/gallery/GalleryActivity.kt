@@ -3,7 +3,6 @@ package org.sopt.daangnmarket_android.ui.view.gallery
 import android.Manifest
 import android.content.ContentUris
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,17 +11,23 @@ import android.provider.MediaStore
 import android.util.Size
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.daangnmarket_android.R
+import org.sopt.daangnmarket_android.domain.model.GalleryImage
 import org.sopt.daangnmarket_android.databinding.ActivityGalleryBinding
 import org.sopt.daangnmarket_android.ui.adapter.GalleryAdapter
+import org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel
 import org.sopt.daangnmarket_android.util.GalleryDecoration
 
+@AndroidEntryPoint
 class GalleryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGalleryBinding
     private lateinit var galleryAdapter: GalleryAdapter
+    private val writeViewModel by viewModels<WriteViewModel>()
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -40,6 +45,7 @@ class GalleryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gallery)
+        initRecyclerView()
         checkPermission()
     }
 
@@ -78,55 +84,19 @@ class GalleryActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun initCustomGallery() {
-        val collection =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                MediaStore.Images.Media.getContentUri(
-                    MediaStore.VOLUME_EXTERNAL
-                )
-            } else {
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            }
-        val projection = arrayOf(MediaStore.Images.Media._ID)
-        val sortOrder = MediaStore.Images.ImageColumns.DATE_ADDED + " DESC"
-
-        val query = contentResolver.query(
-            collection,
-            projection,
-            null,
-            null,
-            sortOrder
-        )
-
-        val imageBitmapList = mutableListOf<Bitmap>()
-        query?.use { cursor ->
-            val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
-
-            while (cursor.moveToNext()) {
-                val id = cursor.getLong(idColumn)
-
-                val contentUri: Uri = ContentUris.withAppendedId(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    id
-                )
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    imageBitmapList += contentResolver.loadThumbnail(
-                        contentUri,
-                        Size(640, 640),
-                        null
-                    )
-                } else {
-                    // TODO: SDK 28 이하에서 imageList 만드는 법
-                }
-            }
-        }
-
+    private fun initRecyclerView() {
         galleryAdapter = GalleryAdapter()
-        galleryAdapter.replaceItem(imageBitmapList)
         with(binding.rvGallery) {
             addItemDecoration(GalleryDecoration(3))
+            adapter = galleryAdapter
         }
-        binding.rvGallery.adapter = galleryAdapter
+    }
+
+    private fun initCustomGallery() {
+//        galleryAdapter.replaceItem(imageBitmapList)
+        writeViewModel.fetchGallery()
+        writeViewModel.imageList.observe(this) {
+            galleryAdapter.replaceItem(it)
+        }
     }
 }

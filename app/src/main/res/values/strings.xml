@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">당근마켓</string>
+    <string name="gallery_finish">완료</string>
+    <string name="gallery_all_images">모든 사진</string>
 </resources>
