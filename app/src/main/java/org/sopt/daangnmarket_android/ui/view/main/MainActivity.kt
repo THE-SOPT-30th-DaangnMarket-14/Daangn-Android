@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.ActivityMainBinding
+import org.sopt.daangnmarket_android.ui.view.main.adapter.ViewPagerAdapter
 
 // 다희
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package org.sopt.daangnmarket_android.ui.view.main
+package org.sopt.daangnmarket_android.ui.view.main.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
