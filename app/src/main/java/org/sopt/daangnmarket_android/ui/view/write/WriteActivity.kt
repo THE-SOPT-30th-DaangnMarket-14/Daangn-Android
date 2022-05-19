@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import org.sopt.daangnmarket_android.databinding.ActivityWriteBinding
@@ -29,6 +30,8 @@ class WriteActivity : AppCompatActivity() {
             finish()
         }
         hideKeyBoard()
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        //키보드 조절
     }
 
     private fun hideKeyBoard(){

@@ -71,7 +71,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_Layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -137,6 +137,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="38dp"
+                android:paddingBottom="40dp"
                 android:background="@null"
                 android:textColorHint="@color/gray_c4c4c4"
                 android:textSize="14sp"
@@ -145,7 +146,7 @@
                 android:maxLength="1000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/v_line4" />
+                app:layout_constraintTop_toTopOf="@id/v_line4"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

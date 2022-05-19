@@ -11,6 +11,7 @@
         android:theme="@style/Theme.DaangnMarketAndroid" >
         <activity
             android:name=".ui.view.write.WriteActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" >
 
         <!-- 이 intent-filter 를 여러분들이 개발하는 Activity 태그 안으로 이동시키면 -->
