@@ -19,6 +19,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:itemIconTint="@color/black"
+        app:itemTextAppearanceActive="@style/TextAppearance.AppCompat.Icon.ic2"
+        app:itemTextAppearanceInactive="@style/TextAppearance.AppCompat.Icon.ic2"
         app:itemTextColor="@color/black"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
