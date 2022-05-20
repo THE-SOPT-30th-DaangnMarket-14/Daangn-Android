@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.sopt.daangnmarket_android">
+    package="org.sopt.daangnmarket_android" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".application.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DaangnMarketAndroid">
+        android:theme="@style/Theme.DaangnMarketAndroid" >
         <activity
             android:name=".ui.view.gallery.GalleryActivity"
             android:exported="true" >
@@ -27,8 +28,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.main.MainActivity"
-            android:exported="true">
-
+            android:exported="true" >
         </activity>
     </application>
 

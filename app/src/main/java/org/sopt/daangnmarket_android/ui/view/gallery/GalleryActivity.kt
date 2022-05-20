@@ -1,28 +1,23 @@
 package org.sopt.daangnmarket_android.ui.view.gallery
 
 import android.Manifest
-import android.content.ContentUris
 import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
-import android.util.Size
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.daangnmarket_android.R
-import org.sopt.daangnmarket_android.domain.model.GalleryImage
 import org.sopt.daangnmarket_android.databinding.ActivityGalleryBinding
 import org.sopt.daangnmarket_android.ui.adapter.GalleryAdapter
 import org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel
 import org.sopt.daangnmarket_android.util.GalleryDecoration
+import org.sopt.daangnmarket_android.util.GalleryItemAnimator
+import org.sopt.daangnmarket_android.util.shortToast
 
 @AndroidEntryPoint
 class GalleryActivity : AppCompatActivity() {
@@ -94,6 +89,7 @@ class GalleryActivity : AppCompatActivity() {
         }
         with(binding.rvGallery) {
             addItemDecoration(GalleryDecoration(3))
+            itemAnimator = GalleryItemAnimator()
             adapter = galleryAdapter
         }
     }
@@ -107,7 +103,7 @@ class GalleryActivity : AppCompatActivity() {
             galleryAdapter.replaceItem(it)
         }
         writeViewModel.pickOutOfBound.observe(this) {
-            Toast.makeText(this, "10장까지만 선택해주세요", Toast.LENGTH_SHORT).show()
+            shortToast("10장까지만 선택해주세요")
         }
     }
 }
