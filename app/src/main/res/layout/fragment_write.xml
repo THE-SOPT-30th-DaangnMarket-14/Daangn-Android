@@ -81,6 +81,16 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_write_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/v_line2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_write_image" />
+
                 <View
                     android:id="@+id/v_line2"
                     android:layout_width="match_parent"
