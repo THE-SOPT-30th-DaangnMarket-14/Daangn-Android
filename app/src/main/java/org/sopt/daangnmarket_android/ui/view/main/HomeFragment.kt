@@ -1,15 +1,15 @@
 package org.sopt.daangnmarket_android.ui.view.main
 
-import android.content.ClipData
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.FragmentHomeBinding
 import org.sopt.daangnmarket_android.ui.view.data.ItemData
 import org.sopt.daangnmarket_android.ui.view.main.adapter.ItemAdapter
+import org.sopt.daangnmarket_android.ui.view.write.WriteActivity
 
 class HomeFragment : Fragment() {
     private lateinit var itemAdapter: ItemAdapter
@@ -28,6 +28,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
+        initTransactionEvent()
     }
 
     private fun initAdapter() {
@@ -45,5 +46,17 @@ class HomeFragment : Fragment() {
             )
         )
         itemAdapter.notifyDataSetChanged()
+    }
+
+    private fun initTransactionEvent(){
+        binding.ibFab.setOnClickListener {
+            val intent = Intent(context,WriteActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

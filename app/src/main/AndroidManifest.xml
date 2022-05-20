@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DaangnMarketAndroid">
+        <activity android:name=".ui.view.write.WriteActivity" />
         <activity
             android:name=".ui.view.main.MainActivity"
             android:exported="true">

@@ -10,7 +10,7 @@
         android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="19dp"
         android:fontFamily="@font/nanum_barun_gothic_bold"
         android:text="청파동3가"
@@ -23,7 +23,7 @@
         android:id="@+id/iv_arrow_dropdown_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="19dp"
         android:src="@drawable/ic_arrow_dropdown_line_16"
         app:layout_constraintStart_toEndOf="@+id/tv_location"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
         android:src="@drawable/ic_search_24"
         app:layout_constraintEnd_toStartOf="@+id/iv_menu"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
         android:src="@drawable/ic_menu_24"
         app:layout_constraintEnd_toStartOf="@+id/iv_alarm"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
         android:src="@drawable/ic_alarm_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -84,5 +84,15 @@
             tools:itemCount="6"
             tools:listitem="@layout/item_list" />
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/ib_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_fab"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
