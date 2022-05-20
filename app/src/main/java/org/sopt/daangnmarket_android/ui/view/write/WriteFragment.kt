@@ -32,8 +32,13 @@ class WriteFragment : Fragment() {
     // 생각해보며 한 단계 성장해봅시다.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        tvFinish()
+        btnBack()
+        hideKeyBoard()
+    }
 
-        binding.btnFinish.setOnClickListener {
+    private fun tvFinish() {
+        binding.tvFinish.setOnClickListener {
             if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank()) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
@@ -41,17 +46,24 @@ class WriteFragment : Fragment() {
                 //우선은 버튼 변화 없이 MainActivity로 연결해두었습니다.
             }
         }
+    }
+
+    private fun btnBack() {
         binding.btnBack.setOnClickListener {
             requireActivity().finish()
         }
-        hideKeyBoard()
-        requireActivity().getWindow()
-            .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-        //키보드 조절
     }
 
     private fun hideKeyBoard() {
-        binding.constraintLayout.setOnClickListener {
+        binding.layoutWrite.setOnClickListener {
+            val inputMethodManager =
+                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(
+                requireActivity().currentFocus?.windowToken,
+                0
+            )
+        }
+        binding.layoutContent.setOnClickListener {
             val inputMethodManager =
                 requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(
