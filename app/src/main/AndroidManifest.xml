@@ -8,16 +8,23 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DaangnMarketAndroid">
-        <activity android:name=".ui.view.write.WriteActivity" />
+        android:theme="@style/Theme.DaangnMarketAndroid" >
+        <activity
+            android:name=".ui.view.write.WriteActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true" >
+
+        <!-- 이 intent-filter 를 여러분들이 개발하는 Activity 태그 안으로 이동시키면 -->
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        <!-- 해당 Activity 에서부터 앱이 실행됩니다. -->
+        </activity>
         <activity
             android:name=".ui.view.main.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true" >
         </activity>
     </application>
 
