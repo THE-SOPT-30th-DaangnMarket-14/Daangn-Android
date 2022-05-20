@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.sopt.daangnmarket_android" >
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    package="org.sopt.daangnmarket_android">
 
     <application
-        android:name=".application.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DaangnMarketAndroid" >
+        android:theme="@style/Theme.DaangnMarketAndroid">
         <activity
-            android:name=".ui.view.gallery.GalleryActivity"
-            android:exported="true" >
+            android:name=".ui.view.main.MainActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.view.write.WriteActivity"
+            android:exported="true">
             <!-- 이 intent-filter 를 여러분들이 개발하는 Activity 태그 안으로 이동시키면 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +26,8 @@
             <!-- 해당 Activity 에서부터 앱이 실행됩니다. -->
         </activity>
         <activity
-            android:name=".ui.view.write.WriteActivity"
+            android:name=".ui.view.gallery.GalleryActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.view.main.MainActivity"
-            android:exported="true" >
-        </activity>
     </application>
 
 </manifest>
