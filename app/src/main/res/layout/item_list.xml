@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_home_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:src="@drawable/aos_img_home_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/nanum_barun_gothic"
+        android:textColor="@color/black_212429"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_home_list"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="빙빙이님! 5월 나눔의 날, 특별한 여행을\n선물 받으신 사연을 전해요" />
+
+    <TextView
+        android:id="@+id/tv_list_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nanum_barun_gothic"
+        android:textColor="@color/gray_86878b"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_home_list"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_title"
+        tools:text="당근마켓" />
+
+    <TextView
+        android:id="@+id/tv_list_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/nanum_barun_gothic_bold"
+        android:textColor="@color/black_212429"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_home_list"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_content"
+        tools:text="10,000원" />
+
+    <ImageView
+        android:id="@+id/iv_heart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/aos_ic_heart_16"
+        app:layout_constraintBottom_toTopOf="@id/v_list_line"
+        app:layout_constraintEnd_toStartOf="@id/tv_heart_count" />
+
+    <TextView
+        android:id="@+id/tv_heart_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/nanum_barun_gothic_bold"
+        android:textColor="@color/gray_515256"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@id/v_list_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="3,332" />
+
+    <View
+        android:id="@+id/v_list_line"
+        android:layout_width="328dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/gray_efefef"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_home_list" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
