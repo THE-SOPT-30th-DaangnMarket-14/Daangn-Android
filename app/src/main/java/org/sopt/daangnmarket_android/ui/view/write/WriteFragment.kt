@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -30,7 +29,6 @@ class WriteFragment : Fragment() {
     private var _writeAdapter: WriteAdapter? = null
     private val writeAdapter get() = _writeAdapter ?: error("adapter not initialized")
     private val writeViewModel by activityViewModels<WriteViewModel>()
-//    private val selectedImageList = mutableListOf<GalleryImage?>(null)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +44,15 @@ class WriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnFinish.setOnClickListener {
+        tvFinish()
+        btnBack()
+        hideKeyBoard()
+        initRecyclerView()
+        observeLiveData()
+    }
+
+    private fun tvFinish() {
+        binding.tvFinish.setOnClickListener {
             if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank()) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
@@ -54,30 +60,16 @@ class WriteFragment : Fragment() {
                 //우선은 버튼 변화 없이 MainActivity로 연결해두었습니다.
             }
         }
-        binding.btnBack.setOnClickListener {
-//            requireActivity().finish()
-            parentFragmentManager.commit {
-                replace<GalleryFragment>(R.id.fcv_write, "GalleryFragment")
-            }
-        }
-        hideKeyBoard()
-        requireActivity().getWindow()
-            .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-        //키보드 조절
-
-        // 승현 코드
-        initRecyclerView()
-        observeLiveData()
     }
 
-    override fun onDestroyView() {
-        _binding = null
-        _writeAdapter = null
-        super.onDestroyView()
+    private fun btnBack() {
+        binding.btnBack.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     private fun hideKeyBoard() {
-        binding.constraintLayout.setOnClickListener {
+        binding.layoutWrite.setOnClickListener {
             val inputMethodManager =
                 requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(

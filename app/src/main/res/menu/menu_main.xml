@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/selector_ic_home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/menu_viliage"
+        android:icon="@drawable/selector_ic_viliage"
+        android:title="@string/viliage" />
+    <item
+        android:id="@+id/menu_gps"
+        android:icon="@drawable/selector_ic_gps"
+        android:title="@string/gps" />
+    <item
+        android:id="@+id/menu_talk"
+        android:icon="@drawable/selector_ic_talk"
+        android:title="@string/talk" />
+    <item
+        android:id="@+id/menu_mypage"
+        android:icon="@drawable/selector_ic_mypage"
+        android:title="@string/mypage" />
+</menu>
