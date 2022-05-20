@@ -28,6 +28,7 @@
 
         <TextView
             android:id="@+id/tv_writing"
+            style="@style/TextAppearance.AppCompat.Headline.h3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="49dp"
@@ -35,24 +36,23 @@
             android:text="@string/write"
             android:textColor="@color/black_212429"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/TextAppearance.AppCompat.Headline.h3"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_finish"
+            style="@style/TextAppearance.AppCompat.Body.b1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onTextViewClicked"
-            android:clickable="true"
             android:layout_marginTop="21dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:onClick="onTextViewClicked"
             android:text="@string/write_finish"
             android:textColor="@color/gray_c4c4c4"
             app:layout_constraintBottom_toTopOf="@+id/v_line1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/TextAppearance.AppCompat.Body.b1"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/v_line1"
@@ -78,6 +78,16 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_write_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/v_line2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_write_image" />
+
                 <View
                     android:id="@+id/v_line2"
                     android:layout_width="match_parent"
@@ -88,6 +98,7 @@
 
                 <EditText
                     android:id="@+id/et_title"
+                    style="@style/TextAppearance.AppCompat.Body.b3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -97,8 +108,7 @@
                     android:maxLength="15"
                     android:textColorHint="@color/gray_c4c4c4"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/v_line2"
-                    style="@style/TextAppearance.AppCompat.Body.b3"/>
+                    app:layout_constraintTop_toTopOf="@id/v_line2" />
 
                 <View
                     android:id="@+id/v_line3"
@@ -110,6 +120,7 @@
 
                 <EditText
                     android:id="@+id/et_price"
+                    style="@style/TextAppearance.AppCompat.Body.b3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -120,8 +131,7 @@
                     android:maxLength="10"
                     android:textColorHint="@color/gray_c4c4c4"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/v_line3"
-                    style="@style/TextAppearance.AppCompat.Body.b3"/>
+                    app:layout_constraintTop_toTopOf="@id/v_line3" />
 
                 <View
                     android:id="@+id/v_line4"
@@ -133,21 +143,22 @@
 
                 <EditText
                     android:id="@+id/et_content"
+                    style="@style/TextAppearance.AppCompat.Body.b3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="22dp"
                     android:layout_marginEnd="38dp"
-                    android:gravity="top"
                     android:background="@null"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:gravity="top"
                     android:hint="@string/write_content"
-                    android:textColorHint="@color/gray_c4c4c4"
                     android:maxLength="1000"
                     android:paddingBottom="40dp"
+                    android:textColorHint="@color/gray_c4c4c4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/v_line4"
-                    style="@style/TextAppearance.AppCompat.Body.b3"/>
+                    app:layout_constraintTop_toTopOf="@id/v_line4" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>

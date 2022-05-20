@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="image"
+            type="org.sopt.daangnmarket_android.domain.model.GalleryImage" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@{image.isSelected ? @drawable/rectangle_orange_border_2 : null}"
+            android:cropToPadding="true"
+            android:padding='@{image.isSelected ? @dimen/selected_image : @dimen/padding_null}'
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_select"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@{image.isSelected ? @drawable/circle_orange : @drawable/circle_white_stroke}"
+            android:gravity="center"
+            android:text="@{image.isSelected ? Integer.toString(image.selectOrder) : null}"
+            android:textColor="@color/white_ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.905"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.095" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

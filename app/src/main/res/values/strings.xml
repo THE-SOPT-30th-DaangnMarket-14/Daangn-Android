@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">당근마켓</string>
+    <string name="gallery_finish">완료</string>
+    <string name="gallery_all_images">모든 사진</string>
     <string name="home">홈</string>
     <string name="viliage">동네생활</string>
     <string name="gps">내 근처</string>
