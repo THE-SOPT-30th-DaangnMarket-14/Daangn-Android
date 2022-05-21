@@ -25,10 +25,12 @@ class ItemAdapter :  RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
         private val binding: ItemListBinding
     ) : RecyclerView.ViewHolder(binding.root){
         fun onBind(data: ItemData){
-            binding.tvListTitle.text = data.title
-            binding.tvListContent.text = data.content
-            binding.tvListPrice.text = data.price
-            binding.tvHeartCount.text = data.heart
+            with(binding){
+                tvListTitle.text = data.title
+                tvListContent.text = data.content
+                tvListPrice.text = data.price
+                tvHeartCount.text = data.heart
+            }
         }
     }
 }

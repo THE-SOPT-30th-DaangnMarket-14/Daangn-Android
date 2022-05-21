@@ -14,7 +14,7 @@ import org.sopt.daangnmarket_android.ui.view.write.WriteActivity
 class HomeFragment : Fragment() {
     private lateinit var itemAdapter: ItemAdapter
     private var _binding : FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: error("binding not initialized")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
