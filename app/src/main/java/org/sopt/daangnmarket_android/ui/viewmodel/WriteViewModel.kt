@@ -35,6 +35,13 @@ class WriteViewModel @Inject constructor(
     private var _isConfirmPossible = MutableLiveData<Boolean>()
     val isConfirmPossible: LiveData<Boolean> get() = _isConfirmPossible
 
+    private var _data = MutableLiveData<String>()
+    val data: LiveData<String> get() = _data
+
+    val writetitle = MutableLiveData<String>()
+    val writeprice = MutableLiveData<String>()
+    val writecontent = MutableLiveData<String>()
+
     fun fetchGallery() {
         if (imageList.value == null) {
             kotlin.runCatching {
