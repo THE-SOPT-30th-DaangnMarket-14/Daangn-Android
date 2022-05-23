@@ -94,7 +94,7 @@ class WriteFragment : Fragment() {
             itemAnimator = WriteItemAnimator()
             adapter = writeAdapter
         }
-        writeAdapter.replaceItem(listOf<GalleryImage?>(null))
+        writeAdapter.replaceItem(listOf<GalleryImage?>(GalleryImage(null, false, 0)))
     }
 
     private fun observeLiveData() {

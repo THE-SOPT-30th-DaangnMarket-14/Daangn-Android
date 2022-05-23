@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.FragmentGalleryBinding
@@ -56,6 +57,7 @@ class GalleryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        writeViewModel.beginTransaction()
         initRecyclerView()
         checkPermission()
         observeLiveData()
@@ -133,6 +135,7 @@ class GalleryFragment : Fragment() {
         }
 
         binding.ivBack.setOnClickListener {
+            writeViewModel.rollback()
             requireActivity().onBackPressed()
         }
     }

@@ -21,6 +21,10 @@ class WriteViewModel @Inject constructor(
     private var _selectedImageList = MutableLiveData<List<Pair<GalleryImage, Int>>>()
     val selectedImageList: LiveData<List<Pair<GalleryImage, Int>>> get() = _selectedImageList
 
+    private var lastImageList: List<GalleryImage?> = listOf()
+
+    private var lastSelectedImageList: List<Pair<GalleryImage, Int>> = listOf()
+
     private var _pickOutOfBound = SingleLiveEvent<Unit>()
     val pickOutOfBound: LiveData<Unit> get() = _pickOutOfBound
 
@@ -33,6 +37,7 @@ class WriteViewModel @Inject constructor(
                 galleryRepository.fetchGallery()
             }.onSuccess {
                 _imageList.value = it
+                beginTransaction()
             }.onFailure {
                 Log.e("fetchGallery() in ViewModel", "failed")
             }
@@ -45,6 +50,7 @@ class WriteViewModel @Inject constructor(
             selectedImageList.value?.toMutableList() ?: mutableListOf()
         val img = imgList[layoutPosition] ?: throw IndexOutOfBoundsException()
         img.isSelected = !img.isSelected
+        Log.i("isSelected", img.isSelected.toString())
         when (img.isSelected) {
             true -> {
                 if (selectedImgList.size < 10) {
@@ -54,7 +60,7 @@ class WriteViewModel @Inject constructor(
                     _pickOutOfBound.call()
                 }
             }
-            false -> selectedImgList.remove(selectedImgList.find { it.first == img })
+            false -> selectedImgList.remove(selectedImgList.find { it.first.image == img.image })
         }
         selectedImgList.forEachIndexed { index, pair ->
             pair.first.selectOrder = index + 1
@@ -79,5 +85,25 @@ class WriteViewModel @Inject constructor(
         }
         _imageList.value = imgList
         _selectedImageList.value = selectedImgList
+    }
+
+    fun beginTransaction() {
+        imageList.value?.let {
+            lastImageList = it.map { image ->
+                image?.copy()
+            }
+            Log.i("lastImageList", lastImageList.toString())
+            lastSelectedImageList = selectedImageList.value?.map { pair ->
+                Pair(pair.first.copy(), pair.second)
+            } ?: listOf()
+            Log.i("lastSelectedImageList", lastSelectedImageList.toString())
+        }
+    }
+
+    fun rollback() {
+        _imageList.value = lastImageList
+        Log.i("lastImageList", lastImageList.toString())
+        _selectedImageList.value = lastSelectedImageList
+        Log.i("lastSelectedImageList", lastSelectedImageList.toString())
     }
 }
