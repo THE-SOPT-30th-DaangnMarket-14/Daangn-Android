@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewmodel"
+            type="org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +51,8 @@
             android:clickable="true"
             android:onClick="onTextViewClicked"
             android:text="@string/write_finish"
-            android:textColor="@color/gray_c4c4c4"
+            android:background="@null"
+            android:textColor="@{viewmodel.writeTitle == null || viewmodel.writePrice == null || viewmodel.writeContent == null || viewmodel.selectedImageList == null ? @color/gray_c4c4c4 : @color/orange_ee8548 }"
             app:layout_constraintBottom_toTopOf="@+id/v_line1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -104,6 +107,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="22dp"
                     android:background="@null"
+                    android:text="@={viewmodel.writeTitle}"
                     android:hint="@string/write_title"
                     android:maxLength="15"
                     android:textColorHint="@color/gray_c4c4c4"
@@ -126,6 +130,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="22dp"
                     android:background="@null"
+                    android:text="@={viewmodel.writePrice}"
                     android:hint="@string/write_price"
                     android:inputType="number"
                     android:maxLength="10"
@@ -150,8 +155,8 @@
                     android:layout_marginTop="22dp"
                     android:layout_marginEnd="38dp"
                     android:background="@null"
-                    android:inputType="textMultiLine|textNoSuggestions"
                     android:gravity="top"
+                    android:text="@={viewmodel.writeContent}"
                     android:hint="@string/write_content"
                     android:maxLength="1000"
                     android:paddingBottom="40dp"
