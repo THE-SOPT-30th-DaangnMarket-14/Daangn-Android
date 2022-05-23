@@ -63,9 +63,9 @@ class WriteFragment : Fragment() {
             } else {
                 startActivity(Intent(requireContext(), MainActivity::class.java))
             }
-            binding.btnBack.setOnClickListener {
-                requireActivity().finish()
-            }
+        }
+        binding.btnBack.setOnClickListener {
+            requireActivity().finish()
         }
     }
 
