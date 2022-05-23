@@ -110,7 +110,6 @@
                     android:text="@={viewmodel.writeTitle}"
                     android:hint="@string/write_title"
                     android:maxLength="15"
-                    android:text="@={viewmodel.writeTitle}"
                     android:textColorHint="@color/gray_c4c4c4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/v_line2" />
@@ -147,7 +146,6 @@
                     android:hint="@string/write_price"
                     android:inputType="number"
                     android:maxLength="10"
-                    android:text="@={viewmodel.writePrice}"
                     android:textColorHint="@color/gray_c4c4c4"
                     app:layout_constraintStart_toEndOf="@id/tv_price"
                     app:layout_constraintTop_toTopOf="@id/v_line3" />
@@ -174,7 +172,6 @@
                     android:hint="@string/write_content"
                     android:maxLength="1000"
                     android:paddingBottom="40dp"
-                    android:text="@={viewmodel.writeContent}"
                     android:textColorHint="@color/gray_c4c4c4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
