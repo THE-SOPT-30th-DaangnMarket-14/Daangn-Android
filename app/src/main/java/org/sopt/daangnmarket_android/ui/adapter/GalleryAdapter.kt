@@ -21,7 +21,7 @@ class GalleryAdapter(
     class CameraViewHolder(private val binding: ItemCameraBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            
+
         }
     }
 
