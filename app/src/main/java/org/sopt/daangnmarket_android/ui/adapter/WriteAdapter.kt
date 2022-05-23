@@ -1,7 +1,7 @@
 package org.sopt.daangnmarket_android.ui.adapter
 
-import android.text.SpannableString
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -35,8 +35,10 @@ class WriteAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(galleryImage: GalleryImage) {
+            if(layoutPosition == 1) {
+                binding.layoutFirstImage.visibility = View.VISIBLE
+            }
             binding.ivWriteImage.setImageBitmap(galleryImage.image)
-
             binding.ivImageDelete.setOnClickListener {
                 removeImage(galleryImage)
             }

@@ -95,11 +95,12 @@ class WriteFragment : Fragment() {
             itemAnimator = WriteItemAnimator()
             adapter = writeAdapter
         }
-        writeAdapter.replaceItem(listOf<GalleryImage?>(null))
+        writeAdapter.replaceItem(listOf<GalleryImage?>(GalleryImage(null, false, 0)))
     }
 
     private fun observeLiveData() {
         writeViewModel.selectedImageList.observe(viewLifecycleOwner) {
+            Log.i("observed?", "yeah")
             val selectedImageList: MutableList<GalleryImage?> =
                 mutableListOf<GalleryImage?>(GalleryImage(null, false, 0)).apply {
                     addAll(it.map { pair -> pair.first })
