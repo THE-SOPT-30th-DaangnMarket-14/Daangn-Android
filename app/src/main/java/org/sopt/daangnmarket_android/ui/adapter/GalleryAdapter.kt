@@ -11,14 +11,17 @@ import org.sopt.daangnmarket_android.databinding.ItemCameraBinding
 import org.sopt.daangnmarket_android.databinding.ItemGalleryBinding
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
 
-class GalleryAdapter(private val imageClick: (Int) -> Unit) :
+class GalleryAdapter(
+    private val imageClick: (Int) -> Unit,
+    private val cameraClick: (Unit) -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
     class CameraViewHolder(private val binding: ItemCameraBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-
+            
         }
     }
 
@@ -52,6 +55,7 @@ class GalleryAdapter(private val imageClick: (Int) -> Unit) :
                     parent,
                     false
                 )
+                binding.root.setOnClickListener { cameraClick(Unit) }
                 CameraViewHolder(binding)
             }
             GALLERY_VIEW_HOLDER -> {

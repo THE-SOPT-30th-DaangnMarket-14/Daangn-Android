@@ -99,6 +99,7 @@ class WriteFragment : Fragment() {
 
     private fun observeLiveData() {
         writeViewModel.selectedImageList.observe(viewLifecycleOwner) {
+            Log.i("observed?", "yeah")
             val selectedImageList: MutableList<GalleryImage?> =
                 mutableListOf<GalleryImage?>(GalleryImage(null, false, 0)).apply {
                     addAll(it.map { pair -> pair.first })
