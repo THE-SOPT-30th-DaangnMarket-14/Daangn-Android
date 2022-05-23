@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -38,6 +40,8 @@ class WriteFragment : Fragment() {
     ): View {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_write, container, false)
+        binding.viewmodel = writeViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -46,27 +50,22 @@ class WriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvFinish()
-        btnBack()
+        clickEvent()
         hideKeyBoard()
         initRecyclerView()
         observeLiveData()
     }
 
-    private fun tvFinish() {
+    private fun clickEvent() {
         binding.tvFinish.setOnClickListener {
-            if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank()) {
+            if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank() || binding.viewmodel?.selectedImageList?.value == null) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
                 startActivity(Intent(requireContext(), MainActivity::class.java))
-                //우선은 버튼 변화 없이 MainActivity로 연결해두었습니다.
             }
-        }
-    }
-
-    private fun btnBack() {
-        binding.btnBack.setOnClickListener {
-            requireActivity().finish()
+            binding.btnBack.setOnClickListener {
+                requireActivity().finish()
+            }
         }
     }
 
