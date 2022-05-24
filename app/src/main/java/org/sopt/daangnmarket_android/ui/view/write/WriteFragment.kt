@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import okhttp3.internal.notify
 import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.FragmentWriteBinding
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
@@ -89,6 +90,8 @@ class WriteFragment : Fragment() {
             }
         }, {
             writeViewModel.unSelectImage(it)
+            // notifyDataSetChanged 를 쓰지 않고도 대표사진을 변경할 수 있는 방법이 있을까 ...
+            writeAdapter.notifyDataSetChanged()
         })
         with(binding.rvWriteImage) {
             addItemDecoration(WriteDecoration(10, 20, 16))
@@ -100,12 +103,12 @@ class WriteFragment : Fragment() {
 
     private fun observeLiveData() {
         writeViewModel.selectedImageList.observe(viewLifecycleOwner) {
-            Log.i("observed?", "yeah")
             val selectedImageList: MutableList<GalleryImage?> =
                 mutableListOf<GalleryImage?>(GalleryImage(null, false, 0)).apply {
                     addAll(it.map { pair -> pair.first })
                 }
             selectedImageList[0]?.selectOrder = selectedImageList.size - 1
+            Log.i("selectedImageList", selectedImageList.toString())
             writeAdapter.replaceItem(selectedImageList)
         }
     }
