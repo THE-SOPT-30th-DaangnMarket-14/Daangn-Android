@@ -22,11 +22,17 @@ import okhttp3.internal.notify
 import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.FragmentWriteBinding
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
+import org.sopt.daangnmarket_android.request.RequestWrite
+import org.sopt.daangnmarket_android.response.ResponseWrite
 import org.sopt.daangnmarket_android.ui.adapter.WriteAdapter
 import org.sopt.daangnmarket_android.ui.view.main.MainActivity
 import org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel
+import org.sopt.daangnmarket_android.util.ServiceCreator
 import org.sopt.daangnmarket_android.util.WriteDecoration
 import org.sopt.daangnmarket_android.util.WriteItemAnimator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class WriteFragment : Fragment() {
     private var _binding: FragmentWriteBinding? = null

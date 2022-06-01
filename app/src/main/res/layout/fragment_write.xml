@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel" />
