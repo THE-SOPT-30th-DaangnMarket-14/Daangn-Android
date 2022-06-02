@@ -8,7 +8,10 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
+import org.sopt.daangnmarket_android.data.repository.DaangnRepositoryImpl
 import org.sopt.daangnmarket_android.data.repository.GalleryRepositoryImpl
+import org.sopt.daangnmarket_android.data.service.DaangnService
+import org.sopt.daangnmarket_android.domain.repository.DaangnRepository
 import org.sopt.daangnmarket_android.domain.repository.GalleryRepository
 import javax.inject.Singleton
 
@@ -20,4 +23,10 @@ object RepositoryModule {
     fun provideGalleryRepository(
         @ApplicationContext context: Context
     ): GalleryRepository = GalleryRepositoryImpl(context)
+
+    @ViewModelScoped
+    @Provides
+    fun provideDaangnRepository(
+        service: DaangnService
+    ): DaangnRepository = DaangnRepositoryImpl(service)
 }

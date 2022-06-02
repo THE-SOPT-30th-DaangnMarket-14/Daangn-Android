@@ -1,5 +1,6 @@
 package org.sopt.daangnmarket_android.ui.view.write
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -46,8 +47,6 @@ class WriteFragment : Fragment() {
         return binding.root
     }
 
-    // 세미나와 다르게 onCreateView 가 아닌 onViewCreated 에 각종 코드를 쓴 이유가 뭘까요?
-    // 생각해보며 한 단계 성장해봅시다.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -62,7 +61,7 @@ class WriteFragment : Fragment() {
             if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank() || binding.viewmodel?.selectedImageList?.value == null) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
-                startActivity(Intent(requireContext(), MainActivity::class.java))
+                writeViewModel.postItem()
             }
         }
         binding.btnBack.setOnClickListener {
@@ -81,6 +80,7 @@ class WriteFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initRecyclerView() {
         Log.i("mlog", "initRecyclerView")
         _writeAdapter = WriteAdapter({
@@ -90,7 +90,6 @@ class WriteFragment : Fragment() {
             }
         }, {
             writeViewModel.unSelectImage(it)
-            // notifyDataSetChanged 를 쓰지 않고도 대표사진을 변경할 수 있는 방법이 있을까 ...
             writeAdapter.notifyDataSetChanged()
         })
         with(binding.rvWriteImage) {
@@ -110,6 +109,10 @@ class WriteFragment : Fragment() {
             selectedImageList[0]?.selectOrder = selectedImageList.size - 1
             Log.i("selectedImageList", selectedImageList.toString())
             writeAdapter.replaceItem(selectedImageList)
+        }
+
+        writeViewModel.isPostSuccess.observe(viewLifecycleOwner) {
+            requireActivity().finish()
         }
     }
 
