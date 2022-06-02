@@ -53,7 +53,7 @@ class DaangnMultiPartUseCase @Inject constructor(
             }
 
             override fun writeTo(sink: BufferedSink) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 99, sink.outputStream())
+                bitmap.compress(Bitmap.CompressFormat.PNG, 99, sink.outputStream())
             }
         }
     }
