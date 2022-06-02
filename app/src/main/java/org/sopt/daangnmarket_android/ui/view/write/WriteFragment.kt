@@ -2,37 +2,27 @@ package org.sopt.daangnmarket_android.ui.view.write
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.Toast
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import okhttp3.internal.notify
 import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.FragmentWriteBinding
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
-import org.sopt.daangnmarket_android.request.RequestWrite
-import org.sopt.daangnmarket_android.response.ResponseWrite
 import org.sopt.daangnmarket_android.ui.adapter.WriteAdapter
 import org.sopt.daangnmarket_android.ui.view.main.MainActivity
 import org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel
-import org.sopt.daangnmarket_android.util.ServiceCreator
 import org.sopt.daangnmarket_android.util.WriteDecoration
 import org.sopt.daangnmarket_android.util.WriteItemAnimator
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class WriteFragment : Fragment() {
     private var _binding: FragmentWriteBinding? = null
@@ -68,6 +58,8 @@ class WriteFragment : Fragment() {
             if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank() || binding.viewmodel?.selectedImageList?.value == null) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
+                // 사실 이게 맞는지도 모르겠..긴한데요..ㅠㅠ 이미지 init 값이 뭔지 모르겠어서.. 주석처리해두었습니다ㅜㅜ
+                // writeViewModel.multipart(title = String(), price = String(), content = String(), image = List<Bitmap>(0,0))
                 startActivity(Intent(requireContext(), MainActivity::class.java))
             }
         }
