@@ -67,8 +67,8 @@
         android:background="@color/gray_efefef"
         app:layout_constraintTop_toBottomOf="@id/tv_location" />
 
-    <ScrollView
-        android:id="@+id/sv_list"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,11 +79,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_item"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="6"
             tools:listitem="@layout/item_list" />
-    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageButton
         android:id="@+id/ib_fab"
