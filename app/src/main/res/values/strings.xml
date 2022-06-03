@@ -13,6 +13,7 @@
     <string name="write_price">₩ 가격 (선택사항)</string>
     <string name="write_content">청파동3가에 올릴 게시글 내용을 작성해주세요. 가품 및
 판매금지품목은 게시가 제한될 수 있어요</string>
+    <string name="dot">·</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
