@@ -1,4 +1,4 @@
-package org.sopt.daangnmarket_android.api
+package org.sopt.daangnmarket_android.data.api
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
