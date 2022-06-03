@@ -177,7 +177,7 @@ class WriteViewModel @Inject constructor(
         val requestBodyHashMap = HashMap<String, RequestBody>()
         requestBodyHashMap["title"] = titleRequestBody
         requestBodyHashMap["price"] = priceRequestBody
-        requestBodyHashMap["content"] = contentRequestBody
+        requestBodyHashMap["contents"] = contentRequestBody
 
         val imageListMultipartBody = mutableListOf<MultipartBody.Part>()
 
