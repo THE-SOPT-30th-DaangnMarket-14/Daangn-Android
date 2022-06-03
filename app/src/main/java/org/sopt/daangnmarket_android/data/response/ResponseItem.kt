@@ -1,4 +1,4 @@
-package org.sopt.daangnmarket_android.ui.view.data
+package org.sopt.daangnmarket_android.data.response
 
 data class ResponseItem(
     val status: Int,

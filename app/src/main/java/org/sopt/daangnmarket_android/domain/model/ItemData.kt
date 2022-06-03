@@ -1,4 +1,4 @@
-package org.sopt.daangnmarket_android.ui.view.data
+package org.sopt.daangnmarket_android.domain.model
 
 data class ItemData(
     val title: String,
@@ -9,4 +9,3 @@ data class ItemData(
     val chatCount: Int,
     val timeBefore: String
 )
-

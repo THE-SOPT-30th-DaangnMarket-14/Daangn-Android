@@ -1,7 +1,6 @@
 package org.sopt.daangnmarket_android.ui.view.write
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,9 +16,7 @@ import androidx.fragment.app.replace
 import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.FragmentWriteBinding
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
-import org.sopt.daangnmarket_android.response.ResponseWrite
 import org.sopt.daangnmarket_android.ui.adapter.WriteAdapter
-import org.sopt.daangnmarket_android.ui.view.main.MainActivity
 import org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel
 import org.sopt.daangnmarket_android.util.WriteDecoration
 import org.sopt.daangnmarket_android.util.WriteItemAnimator
@@ -58,17 +55,12 @@ class WriteFragment : Fragment() {
             if (writeViewModel.writeTitle.value?.length == 0 || writeViewModel.writePrice.value?.length == 0 || writeViewModel.writeContent.value?.length == 0 || writeViewModel.selectedImageList.value?.size == 0) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
-                // 사실 이게 맞는지도 모르겠..긴한데요..ㅠㅠ 이미지 init 값이 뭔지 모르겠어서.. 주석처리해두었습니다ㅜㅜ
-                // writeViewModel.multipart(title = String(), price = String(), content = String(), image = List<Bitmap>(0,0))
-                // 승현 - 이 위치에서 ViewModel 의 multipart() 메서드를 호출하면 됩니다.
-                // 인자로는 서버에 보낼 값, 그러니까 사용자가 직접 입력해 채워넣은 값을 넣으면 되는 것입니다.
                 writeViewModel.multipart(
                     requireNotNull(writeViewModel.writeTitle.value),
                     requireNotNull(writeViewModel.writePrice.value),
                     requireNotNull(writeViewModel.writeContent.value),
                     requireNotNull(writeViewModel.selectedImageList.value).map { requireNotNull(it.first.image) }
                 )
-                startActivity(Intent(requireContext(), MainActivity::class.java))
             }
         }
         binding.btnBack.setOnClickListener {
@@ -116,6 +108,10 @@ class WriteFragment : Fragment() {
             selectedImageList[0]?.selectOrder = selectedImageList.size - 1
             Log.i("selectedImageList", selectedImageList.toString())
             writeAdapter.replaceItem(selectedImageList)
+        }
+
+        writeViewModel.isMultiPartSuccess.observe(viewLifecycleOwner) {
+            requireActivity().finish()
         }
     }
 

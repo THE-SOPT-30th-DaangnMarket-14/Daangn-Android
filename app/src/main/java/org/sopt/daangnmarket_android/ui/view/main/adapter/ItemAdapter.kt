@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.sopt.daangnmarket_android.databinding.ItemListBinding
-import org.sopt.daangnmarket_android.ui.view.data.ItemData
+import org.sopt.daangnmarket_android.domain.model.ItemData
 import java.text.DecimalFormat
 
 class ItemAdapter :  RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
-    val itemList = mutableListOf<ItemData>()
+    var itemList = mutableListOf<ItemData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding =

@@ -3,6 +3,7 @@ package org.sopt.daangnmarket_android.data
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.daangnmarket_android.data.api.WriteService
+import org.sopt.daangnmarket_android.data.api.ItemService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -21,4 +22,5 @@ object ServiceCreator {
         .build() //Retrofit 객체 변환
 
     val writeService: WriteService = retrofit.create(WriteService::class.java)
+    val itemService: ItemService = retrofit.create(ItemService::class.java)
 }
