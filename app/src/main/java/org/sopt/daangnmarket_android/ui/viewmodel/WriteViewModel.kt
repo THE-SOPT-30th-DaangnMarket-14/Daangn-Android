@@ -186,7 +186,8 @@ class WriteViewModel @Inject constructor(
             val imageMultipartBody: MultipartBody.Part =
                 MultipartBody.Part.createFormData(
                     "image",
-                    "and" + System.currentTimeMillis().toString(),
+                    "and" + System.currentTimeMillis()
+                        .toString() + i.toString(), // 승현 - index 를 활용해 이미지 이름을 구분합니다.
                     imageRequestBody
                 )
             imageListMultipartBody.add(imageMultipartBody)
