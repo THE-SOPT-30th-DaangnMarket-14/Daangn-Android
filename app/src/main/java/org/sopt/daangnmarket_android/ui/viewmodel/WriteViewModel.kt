@@ -194,7 +194,7 @@ class WriteViewModel @Inject constructor(
         }
 
         val call: Call<ResponseWrite> =
-            service.postItem(imageListMultipartBody, requestBodyHashMap)
+            ServiceCreator.writeService.postItem(imageListMultipartBody, requestBodyHashMap)
 
         call.enqueue(object : Callback<ResponseWrite> {
             override fun onResponse(
