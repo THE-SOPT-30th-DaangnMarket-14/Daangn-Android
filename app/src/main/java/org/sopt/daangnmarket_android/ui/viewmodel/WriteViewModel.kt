@@ -204,6 +204,7 @@ class WriteViewModel @Inject constructor(
                 if (response.isSuccessful) {
                     Log.d("NetworkTest", "success")
                 }
+                // 승현 - 이 부분에 응답이 왔는데 성공응답이 아닌 실패응답이 온 케이스에 대해 else 문을 작성해보면 좋을 것 같습니다.
             }
 
             override fun onFailure(call: Call<ResponseWrite>, t: Throwable) {
