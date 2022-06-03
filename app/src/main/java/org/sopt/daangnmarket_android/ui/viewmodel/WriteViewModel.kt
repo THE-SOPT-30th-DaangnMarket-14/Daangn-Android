@@ -29,8 +29,7 @@ import org.sopt.daangnmarket_android.domain.model.GalleryImage as GalleryImage
 
 @HiltViewModel
 class WriteViewModel @Inject constructor(
-    private val galleryRepository: GalleryRepository,
-    private var service: WriteService
+    private val galleryRepository: GalleryRepository
 ) : ViewModel() {
     private var _imageList = MutableLiveData<List<GalleryImage?>>()
     val imageList: LiveData<List<GalleryImage?>> get() = _imageList
