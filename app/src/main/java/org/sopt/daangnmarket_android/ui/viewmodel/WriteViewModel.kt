@@ -16,7 +16,7 @@ import okio.BufferedSink
 import org.sopt.daangnmarket_android.data.ServiceCreator
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
 import org.sopt.daangnmarket_android.domain.repository.GalleryRepository
-import org.sopt.daangnmarket_android.response.ResponseWrite
+import org.sopt.daangnmarket_android.data.response.ResponseWrite
 import org.sopt.daangnmarket_android.util.SingleLiveEvent
 import retrofit2.Call
 import retrofit2.Callback

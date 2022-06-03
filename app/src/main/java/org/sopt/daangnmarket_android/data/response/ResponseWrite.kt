@@ -1,4 +1,4 @@
-package org.sopt.daangnmarket_android.response
+package org.sopt.daangnmarket_android.data.response
 
 data class ResponseWrite(
     val status : Int,
