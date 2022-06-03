@@ -16,6 +16,7 @@ import androidx.fragment.app.replace
 import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.FragmentWriteBinding
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
+import org.sopt.daangnmarket_android.response.ResponseWrite
 import org.sopt.daangnmarket_android.ui.adapter.WriteAdapter
 import org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel
 import org.sopt.daangnmarket_android.util.WriteDecoration
@@ -52,7 +53,7 @@ class WriteFragment : Fragment() {
 
     private fun clickEvent() {
         binding.tvFinish.setOnClickListener {
-            if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank() || binding.viewmodel?.selectedImageList?.value == null) {
+            if (writeViewModel.writeTitle.value?.length != 0 || writeViewModel.writePrice.value?.length != 0 || writeViewModel.writeContent.value?.length != 0 || writeViewModel.selectedImageList.value?.size != 0) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
                 // 사실 이게 맞는지도 모르겠..긴한데요..ㅠㅠ 이미지 init 값이 뭔지 모르겠어서.. 주석처리해두었습니다ㅜㅜ
