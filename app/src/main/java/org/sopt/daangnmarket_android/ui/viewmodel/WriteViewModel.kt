@@ -3,29 +3,25 @@ package org.sopt.daangnmarket_android.ui.viewmodel
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.BufferedSink
-import org.sopt.daangnmarket_android.api.WriteService
+import org.sopt.daangnmarket_android.data.ServiceCreator
+import org.sopt.daangnmarket_android.domain.model.GalleryImage
 import org.sopt.daangnmarket_android.domain.repository.GalleryRepository
 import org.sopt.daangnmarket_android.response.ResponseWrite
-import org.sopt.daangnmarket_android.util.ServiceCreator
 import org.sopt.daangnmarket_android.util.SingleLiveEvent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
-import kotlin.math.sin
-import org.sopt.daangnmarket_android.domain.model.GalleryImage as GalleryImage
 
 @HiltViewModel
 class WriteViewModel @Inject constructor(
