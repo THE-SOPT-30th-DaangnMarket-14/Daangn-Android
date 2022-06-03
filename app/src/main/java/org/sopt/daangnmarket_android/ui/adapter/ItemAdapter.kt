@@ -1,4 +1,4 @@
-package org.sopt.daangnmarket_android.ui.view.main.adapter
+package org.sopt.daangnmarket_android.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

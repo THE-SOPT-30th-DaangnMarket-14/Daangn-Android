@@ -13,7 +13,7 @@ import org.sopt.daangnmarket_android.data.ServiceCreator
 import org.sopt.daangnmarket_android.data.response.ResponseItem
 import org.sopt.daangnmarket_android.databinding.FragmentHomeBinding
 import org.sopt.daangnmarket_android.domain.model.ItemData
-import org.sopt.daangnmarket_android.ui.view.main.adapter.ItemAdapter
+import org.sopt.daangnmarket_android.ui.adapter.ItemAdapter
 import org.sopt.daangnmarket_android.ui.view.write.WriteActivity
 import retrofit2.Call
 import retrofit2.Callback
