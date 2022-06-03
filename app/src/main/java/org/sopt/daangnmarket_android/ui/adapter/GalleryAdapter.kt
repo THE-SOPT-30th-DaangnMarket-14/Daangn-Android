@@ -1,6 +1,5 @@
 package org.sopt.daangnmarket_android.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,11 +7,15 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.daangnmarket_android.R
-import org.sopt.daangnmarket_android.domain.model.GalleryImage
 import org.sopt.daangnmarket_android.databinding.ItemCameraBinding
 import org.sopt.daangnmarket_android.databinding.ItemGalleryBinding
+import org.sopt.daangnmarket_android.domain.model.GalleryImage
 
-class GalleryAdapter(private val imageClick: (Int) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GalleryAdapter(
+    private val imageClick: (Int) -> Unit,
+    private val cameraClick: (Unit) -> Unit
+) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
     class CameraViewHolder(private val binding: ItemCameraBinding) :
@@ -22,7 +25,10 @@ class GalleryAdapter(private val imageClick: (Int) -> Unit) : RecyclerView.Adapt
         }
     }
 
-    class GalleryViewHolder(private val binding: ItemGalleryBinding, private val itemClick: (Int) -> Unit) :
+    class GalleryViewHolder(
+        private val binding: ItemGalleryBinding,
+        private val itemClick: (Int) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GalleryImage) {
             binding.ivGallery.setImageBitmap(item.image)
@@ -49,6 +55,7 @@ class GalleryAdapter(private val imageClick: (Int) -> Unit) : RecyclerView.Adapt
                     parent,
                     false
                 )
+                binding.root.setOnClickListener { cameraClick(Unit) }
                 CameraViewHolder(binding)
             }
             GALLERY_VIEW_HOLDER -> {

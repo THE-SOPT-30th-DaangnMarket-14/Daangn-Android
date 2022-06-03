@@ -8,12 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import okhttp3.internal.notify
 import org.sopt.daangnmarket_android.R
 import org.sopt.daangnmarket_android.databinding.FragmentWriteBinding
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
@@ -36,6 +41,8 @@ class WriteFragment : Fragment() {
     ): View {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_write, container, false)
+        binding.viewmodel = writeViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -44,25 +51,20 @@ class WriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvFinish()
-        btnBack()
+        clickEvent()
         hideKeyBoard()
         initRecyclerView()
         observeLiveData()
     }
 
-    private fun tvFinish() {
+    private fun clickEvent() {
         binding.tvFinish.setOnClickListener {
-            if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank()) {
+            if (binding.etTitle.text.isNullOrBlank() || binding.etPrice.text.isNullOrBlank() || binding.etContent.text.isNullOrBlank() || binding.viewmodel?.selectedImageList?.value == null) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
                 startActivity(Intent(requireContext(), MainActivity::class.java))
-                //우선은 버튼 변화 없이 MainActivity로 연결해두었습니다.
             }
         }
-    }
-
-    private fun btnBack() {
         binding.btnBack.setOnClickListener {
             requireActivity().finish()
         }
@@ -88,13 +90,15 @@ class WriteFragment : Fragment() {
             }
         }, {
             writeViewModel.unSelectImage(it)
+            // notifyDataSetChanged 를 쓰지 않고도 대표사진을 변경할 수 있는 방법이 있을까 ...
+            writeAdapter.notifyDataSetChanged()
         })
         with(binding.rvWriteImage) {
             addItemDecoration(WriteDecoration(10, 20, 16))
             itemAnimator = WriteItemAnimator()
             adapter = writeAdapter
         }
-        writeAdapter.replaceItem(listOf<GalleryImage?>(null))
+        writeAdapter.replaceItem(listOf<GalleryImage?>(GalleryImage(null, false, 0)))
     }
 
     private fun observeLiveData() {
@@ -104,6 +108,7 @@ class WriteFragment : Fragment() {
                     addAll(it.map { pair -> pair.first })
                 }
             selectedImageList[0]?.selectOrder = selectedImageList.size - 1
+            Log.i("selectedImageList", selectedImageList.toString())
             writeAdapter.replaceItem(selectedImageList)
         }
     }

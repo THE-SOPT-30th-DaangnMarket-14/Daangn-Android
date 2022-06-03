@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewmodel"
+            type="org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,10 +49,10 @@
             android:layout_marginTop="21dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
-            android:clickable="true"
+            android:background="@null"
             android:onClick="onTextViewClicked"
             android:text="@string/write_finish"
-            android:textColor="@color/gray_c4c4c4"
+            android:textColor="@{viewmodel.writeTitle.length == 0 || viewmodel.writePrice.length == 0 || viewmodel.writeContent.length == 0 || (viewmodel.selectedImageList == null || viewmodel.selectedImageList.size == 0) ? @color/gray_c4c4c4 : @color/orange_ee8548 }"
             app:layout_constraintBottom_toTopOf="@+id/v_line1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -104,6 +107,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="22dp"
                     android:background="@null"
+                    android:text="@={viewmodel.writeTitle}"
                     android:hint="@string/write_title"
                     android:maxLength="15"
                     android:textColorHint="@color/gray_c4c4c4"
@@ -118,6 +122,18 @@
                     android:background="@color/gray_efefef"
                     app:layout_constraintTop_toBottomOf="@id/et_title" />
 
+                <TextView
+                    android:id="@+id/tv_price"
+                    style="@style/TextAppearance.AppCompat.Body.b3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="22dp"
+                    android:text="@string/text_won"
+                    android:textColor="@{viewmodel.writePrice.length == 0 ? @color/gray_c4c4c4 : @color/black}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/v_line3" />
+
                 <EditText
                     android:id="@+id/et_price"
                     style="@style/TextAppearance.AppCompat.Body.b3"
@@ -126,11 +142,12 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="22dp"
                     android:background="@null"
+                    android:text="@={viewmodel.writePrice}"
                     android:hint="@string/write_price"
                     android:inputType="number"
                     android:maxLength="10"
                     android:textColorHint="@color/gray_c4c4c4"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_price"
                     app:layout_constraintTop_toTopOf="@id/v_line3" />
 
                 <View
@@ -150,8 +167,8 @@
                     android:layout_marginTop="22dp"
                     android:layout_marginEnd="38dp"
                     android:background="@null"
-                    android:inputType="textMultiLine|textNoSuggestions"
                     android:gravity="top"
+                    android:text="@={viewmodel.writeContent}"
                     android:hint="@string/write_content"
                     android:maxLength="1000"
                     android:paddingBottom="40dp"

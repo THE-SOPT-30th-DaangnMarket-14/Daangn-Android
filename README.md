@@ -2,8 +2,16 @@
 
 ```
 🥕 DaangnMarket-Android 🥕
+ ┣ 📂 application
  ┣ 📂 data
+ ┃ ┗ 📂 repository
+ ┣ 📂 di
+ ┣ 📂 domain
+ ┃ ┣ 📂 model 
+ ┃ ┗ 📂 repository
  ┣ 📂 ui
- ┃ ┗ 📂 adapter
+ ┃ ┣ 📂 adapter
+ ┃ ┣ 📂 view
+ ┃ ┗ 📂 viewmodel
  ┗ 📂utils
 ```
