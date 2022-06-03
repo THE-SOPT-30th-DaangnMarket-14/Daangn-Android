@@ -9,7 +9,7 @@ data class ResponseItem(
     data class Data(
         val title: String,
         val location: String,
-        val price: Int,
+        val price: Long,
         val image: String,
         val likeCount: Int,
         val chatCount: Int,

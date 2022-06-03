@@ -3,7 +3,7 @@ package org.sopt.daangnmarket_android.ui.view.data
 data class ItemData(
     val title: String,
     val location: String,
-    val price: Int,
+    val price: Long,
     val image: String,
     val likeCount: Int,
     val chatCount: Int,
