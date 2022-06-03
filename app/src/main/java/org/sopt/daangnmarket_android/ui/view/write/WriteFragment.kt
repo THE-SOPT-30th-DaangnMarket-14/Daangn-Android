@@ -1,6 +1,7 @@
 package org.sopt.daangnmarket_android.ui.view.write
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import org.sopt.daangnmarket_android.databinding.FragmentWriteBinding
 import org.sopt.daangnmarket_android.domain.model.GalleryImage
 import org.sopt.daangnmarket_android.response.ResponseWrite
 import org.sopt.daangnmarket_android.ui.adapter.WriteAdapter
+import org.sopt.daangnmarket_android.ui.view.main.MainActivity
 import org.sopt.daangnmarket_android.ui.viewmodel.WriteViewModel
 import org.sopt.daangnmarket_android.util.WriteDecoration
 import org.sopt.daangnmarket_android.util.WriteItemAnimator
@@ -53,7 +55,7 @@ class WriteFragment : Fragment() {
 
     private fun clickEvent() {
         binding.tvFinish.setOnClickListener {
-            if (writeViewModel.writeTitle.value?.length != 0 || writeViewModel.writePrice.value?.length != 0 || writeViewModel.writeContent.value?.length != 0 || writeViewModel.selectedImageList.value?.size != 0) {
+            if (writeViewModel.writeTitle.value?.length == 0 || writeViewModel.writePrice.value?.length == 0 || writeViewModel.writeContent.value?.length == 0 || writeViewModel.selectedImageList.value?.size == 0) {
                 Toast.makeText(requireContext(), "채워지지 않은 부분이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
                 // 사실 이게 맞는지도 모르겠..긴한데요..ㅠㅠ 이미지 init 값이 뭔지 모르겠어서.. 주석처리해두었습니다ㅜㅜ
@@ -66,6 +68,7 @@ class WriteFragment : Fragment() {
                     requireNotNull(writeViewModel.writeContent.value),
                     requireNotNull(writeViewModel.selectedImageList.value).map { requireNotNull(it.first.image) }
                 )
+                startActivity(Intent(requireContext(), MainActivity::class.java))
             }
         }
         binding.btnBack.setOnClickListener {
