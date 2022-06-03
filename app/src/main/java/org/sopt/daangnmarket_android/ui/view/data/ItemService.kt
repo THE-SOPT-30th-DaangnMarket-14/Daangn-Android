@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ItemService {
-    @GET("item")
+    @GET("/item")
     fun getItems(): Call<ResponseItem>
 }

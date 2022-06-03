@@ -85,6 +85,7 @@ class HomeFragment : Fragment() {
 
             override fun onFailure(call: Call<ResponseItem>, t: Throwable) {
                 Log.e("NetworkTest","error:$t")
+                Toast.makeText(context, "연결 실패", Toast.LENGTH_SHORT).show()
             }
         })
     }
