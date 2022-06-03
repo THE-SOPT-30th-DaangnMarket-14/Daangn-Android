@@ -4,7 +4,9 @@
 🥕 DaangnMarket-Android 🥕
  ┣ 📂 application
  ┣ 📂 data
- ┃ ┗ 📂 repository
+ ┃ ┣ 📂 api
+ ┃ ┣ 📂 repository
+ ┃ ┗ 📂 response
  ┣ 📂 di
  ┣ 📂 domain
  ┃ ┣ 📂 model 
@@ -12,6 +14,8 @@
  ┣ 📂 ui
  ┃ ┣ 📂 adapter
  ┃ ┣ 📂 view
+ ┃ ┃ ┣ 📂 main
+ ┃ ┃ ┗ 📂 write
  ┃ ┗ 📂 viewmodel
  ┗ 📂utils
 ```
